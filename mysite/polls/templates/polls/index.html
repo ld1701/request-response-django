@@ -1,0 +1,35 @@
+{% extends 'polls/base.html' %}
+{% load static %}   
+
+{% block title %}Polls Index{% endblock %}
+
+{% block extra_style %}
+<style>
+body {
+    background-image: url("{% static 'polls/fondo_index.jpeg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(255, 0, 0, 0.7);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+  <h1>Últimas preguntas</h1>
+  <ul>
+    {% for question in latest_question_list %}
+      <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% empty %}
+      <li>No hay encuestas disponibles.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+
+
+

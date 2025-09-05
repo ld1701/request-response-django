@@ -1,0 +1,40 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block extra_style %}
+<style>
+body {
+    background-image: url("{% static 'polls/fondo_results.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+main {
+    background-color: rgba(0,0,0,0.4); /* hace que el contenido sea legible */
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 700px;
+    border-radius: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Resultados para: {{ question.question_text }}</h1>
+
+<ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }} -- {{ choice.votes }} votos</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Volver a la pregunta</a>
+<a href="{% url 'polls:index' %}">Volver al índice</a>
+{% endblock %}
+
